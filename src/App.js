@@ -6,24 +6,24 @@ import Description from "./components/Description";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 
-const articleContext = createContext();
+// const articleContext = createContext();
 
 function App() {
-  const [articles, setArticles] = useState([]);
+  // const [articles, setArticles] = useState([]);
   return (
-      <articleContext.Provider value={{ articles, setArticles }}>
+    // <articleContext.Provider value={{ articles, setArticles }}>
     <div className="App">
-        <Header />
-        <Description />
-        {/* <Articles/> */}
-        <Nav />
-        <Routes>
-          <Route path="/articles" element={<Articles/>} />
-        </Routes>
+      <Header />
+      <Description />
+      {/* <Articles/> */}
+      <Nav />
+      <Routes>
+        <Route path="/articles" element={<Articles />} />
+      </Routes>
     </div>
-      </articleContext.Provider>
+    // </articleContext.Provider>
   );
 }
 
 export default App;
-export { articleContext };
+// export { articleContext };
