@@ -22,3 +22,11 @@ export function fetchArticlesByTopic (slug) {
       return res.json();
     })
 }
+
+export function fetchArticlesById (Id) {
+  return fetch(
+      `https://good-morning-news-app.herokuapp.com/api/articles/${1}`
+    ).then((res) => {
+      return res.json();
+    })
+}

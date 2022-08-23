@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchArticles } from "../api";
+import { Link } from "react-router-dom";
 
 export default function Articles() {
   const [articles, setArticles] = useState([]);
@@ -34,6 +35,7 @@ export default function Articles() {
         {articles.map((article) => {
           let date = Date(`${article.created_at}`);
           return (
+            <Link className="link-articles"to={`articles/${article.article_id}`}>
             <li className="cards">
               <h6 id="card">
                 Title : {article.title}
@@ -45,6 +47,7 @@ export default function Articles() {
                 Created on : {date.toLocaleString()}
               </h6>
             </li>
+            </Link>
           );
         })}
       </ul>

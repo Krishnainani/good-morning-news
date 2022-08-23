@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Articles from "./components/Articles";
+import ArticleById from "./components/ArticlesById";
 import ArticlesByTopic from "./components/ArticlesByTopic";
 import Description from "./components/Description";
 import Header from "./components/Header";
@@ -22,6 +23,7 @@ function App() {
         <Route path="/articles" element={<Articles />} />
         <Route path="/topics" element={<Topics />} />
         <Route path="/topic/:slug" element={<ArticlesByTopic />} />
+        <Route path="/articles/:id" element={<ArticleById />} />
       </Routes>
     </div>
     // </articleContext.Provider>
