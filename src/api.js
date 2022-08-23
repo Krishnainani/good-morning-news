@@ -23,9 +23,9 @@ export function fetchArticlesByTopic (slug) {
     })
 }
 
-export function fetchArticlesById (Id) {
+export function fetchArticleById (Id) {
   return fetch(
-      `https://good-morning-news-app.herokuapp.com/api/articles/${1}`
+      `https://good-morning-news-app.herokuapp.com/api/articles/${Id}`
     ).then((res) => {
       return res.json();
     })

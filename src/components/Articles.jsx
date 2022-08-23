@@ -35,18 +35,21 @@ export default function Articles() {
         {articles.map((article) => {
           let date = Date(`${article.created_at}`);
           return (
-            <Link className="link-articles"to={`articles/${article.article_id}`}>
-            <li className="cards">
-              <h6 id="card">
-                Title : {article.title}
-                <br />
-                Author : {article.author}
-                <br />
-                Topic : {article.topic}
-                <br />
-                Created on : {date.toLocaleString()}
-              </h6>
-            </li>
+            <Link
+              className="link-articles"
+              to={`num/${article.article_id}`}
+            >
+              <li className="cards">
+                <h6 id="card">
+                  {article.title}
+                  <br />
+                  Author : {article.author}
+                  <br />
+                  Topic : {article.topic}
+                  <br />
+                  Created on : {date.toLocaleString()}
+                </h6>
+              </li>
             </Link>
           );
         })}
