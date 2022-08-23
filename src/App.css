@@ -59,7 +59,7 @@
   }
 
   .nav {
-    background-color: #333;
+    background-color:#4a6395;
     overflow: hidden;
   }
   
@@ -117,4 +117,5 @@ button {
 .link-articles{
       background-color: #e7e7e7;
       color:rgb(248, 252, 251) ;
+      text-decoration: none;
     }

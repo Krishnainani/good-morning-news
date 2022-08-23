@@ -35,7 +35,7 @@ export default function Articles() {
         {articles.map((article) => {
           let date = Date(`${article.created_at}`);
           return (
-            <Link className="link-articles"to={`articles/${article.article_id}`}>
+            <Link className="link-articles"to={`article/${article.article_id}`}>
             <li className="cards">
               <h6 id="card">
                 Title : {article.title}
