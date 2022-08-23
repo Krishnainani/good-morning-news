@@ -23,7 +23,7 @@ function App() {
         <Route path="/articles" element={<Articles />} />
         <Route path="/topics" element={<Topics />} />
         <Route path="/topic/:slug" element={<ArticlesByTopic />} />
-        <Route path="articles/article/:id" element={<ArticleById />} />
+        <Route path="articles/num/:id" element={<ArticleById />} />
       </Routes>
     </div>
     // </articleContext.Provider>
