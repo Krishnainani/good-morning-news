@@ -2,9 +2,11 @@ import { createContext, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Articles from "./components/Articles";
+import ArticlesByTopic from "./components/ArticlesByTopic";
 import Description from "./components/Description";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
+import Topics from "./components/Topics";
 
 // const articleContext = createContext();
 
@@ -15,10 +17,11 @@ function App() {
     <div className="App">
       <Header />
       <Description />
-      {/* <Articles/> */}
       <Nav />
       <Routes>
         <Route path="/articles" element={<Articles />} />
+        <Route path="/topics" element={<Topics />} />
+        <Route path="/topic/:slug" element={<ArticlesByTopic />} />
       </Routes>
     </div>
     // </articleContext.Provider>
