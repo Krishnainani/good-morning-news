@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchArticles } from "./api";
+import { fetchArticles } from "../api";
 
 export default function Articles() {
   const [articles, setArticles] = useState([]);

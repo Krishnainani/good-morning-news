@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {useNavigate } from "react-router-dom";
-import { fetchTopics } from "./api";
+import { fetchTopics } from "../api";
 
 export default function Topics() {
   const [topics, setTopics] = useState([]);
@@ -52,7 +52,7 @@ export default function Topics() {
                 </h6>
               </li>
               <button type="submit" onClick={handleSubmit(topic.slug)}>
-                View Articles
+                View Articles on {topic.slug}
               </button>
             </>
           );
