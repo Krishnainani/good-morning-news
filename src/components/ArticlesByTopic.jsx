@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchArticlesByTopic } from "./api";
+import { fetchArticlesByTopic } from "../api";
 
 export default function ArticlesByTopic() {
   const [articlesByTopic, setArticlesByTopic] = useState([]);

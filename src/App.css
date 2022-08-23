@@ -53,10 +53,40 @@
    
   border-radius: 15px;
    
-  padding: 0.5rem;
+  padding: 0.7rem;
+
    
   }
 
   .nav{
     background-color: rgb(220, 227, 228);
   }
+
+button {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    background-color:beige;
+    border-radius: 12px;
+    padding: 0.4rem;
+  }
+
+  /* .cards {
+ 
+    display: grid;
+     
+    grid-template-columns: auto;
+     
+    grid-auto-rows: auto;
+     
+    grid-gap: 1.5rem;
+     
+    }
+     
+     
+    #card {
+     
+    border: 1px solid #e7e7e7;
+     
+    border-radius: 15px;
+     
+    padding: 0.7rem;
+    }   */
