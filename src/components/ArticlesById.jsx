@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchArticleById, patchVotes } from "../api";
 import { useParams } from "react-router-dom";
+import Comments from "./Comments";
 
 export default function ArticleById() {
   const [articleById, setArticleById] = useState({});
@@ -20,21 +21,18 @@ export default function ArticleById() {
         return article;
       });
       patchVotes(votes, Id).catch((err) => {
-        setArticleById(() => {
-          const article = { ...articleById };
-          article.votes = "something went wrong";
-          return article;
-        });
+        setArticleById(() => articleById);
       });
     };
   }
-  let date = Date(`${articleById.created_at}`);
+  let date = new Date(articleById.created_at);
   return (
+
     <div>
       <h3>{articleById.title}</h3>
       <h4>By -- {articleById.author}</h4>
       <h5>Topic -- {articleById.topic}</h5>
-      <h6>{date.toLocaleString()}</h6>
+      <h6>{date.toDateString()} {date.toLocaleTimeString()}</h6>
       <p>{articleById.body}</p>
       <button type="display">votes - {articleById.votes}</button>
       <button type="submit" onClick={handleVotes(1, articleById.article_id)}>
