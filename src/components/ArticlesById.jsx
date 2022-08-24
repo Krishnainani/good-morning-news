@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { fetchArticleById } from "../api";
+import { fetchArticleById, patchVotes } from "../api";
 import { useParams } from "react-router-dom";
 
 export default function ArticleById() {
   const [articleById, setArticleById] = useState({});
-
   const { id } = useParams();
 
   useEffect(() => {
@@ -13,8 +12,23 @@ export default function ArticleById() {
     });
   }, []);
 
+  function handleVotes(votes, Id) {
+    return () => {
+      setArticleById(() => {
+        const article = { ...articleById };
+        article.votes = articleById.votes + votes;
+        return article;
+      });
+      patchVotes(votes, Id).catch((err) => {
+        setArticleById(() => {
+          const article = { ...articleById };
+          article.votes = "something went wrong";
+          return article;
+        });
+      });
+    };
+  }
   let date = Date(`${articleById.created_at}`);
-
   return (
     <div>
       <h3>{articleById.title}</h3>
@@ -23,10 +37,10 @@ export default function ArticleById() {
       <h6>{date.toLocaleString()}</h6>
       <p>{articleById.body}</p>
       <button type="display">votes - {articleById.votes}</button>
-      <button type="submit" >
+      <button type="submit" onClick={handleVotes(1, articleById.article_id)}>
         <i className="fas fa-thumbs-up fa-2x" id="thumbs-up"></i>
       </button>
-      <button type="submit">
+      <button type="submit" onClick={handleVotes(-1, articleById.article_id)}>
         <i className="fas fa-thumbs-down fa-2x" id="thumbs-down"></i>
       </button>
       <br />

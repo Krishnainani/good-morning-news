@@ -30,3 +30,22 @@ export function fetchArticleById (Id) {
       return res.json();
     })
 }
+
+export function patchVotes(votes, Id) {
+  return fetch(
+    `https://good-morning-news-app.herokuapp.com/api/articles/${Id}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify({"inc_votes": votes}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  ).then((res) => {
+    if(res.ok === false){
+      return Promise.reject({msg: "Invalid request" });
+    }else{
+    return res.json();
+    }
+  })
+}
