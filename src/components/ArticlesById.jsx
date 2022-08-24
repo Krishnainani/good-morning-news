@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchArticleById, patchVotes } from "../api";
 import { useParams } from "react-router-dom";
 import Comments from "./Comments";
+import ShowContents from "./Flip";
 
 export default function ArticleById() {
   const [articleById, setArticleById] = useState({});
@@ -44,6 +45,7 @@ export default function ArticleById() {
       <br />
       <br />
       <button type="display">comments - {articleById.comment_count}</button>
+      <ShowContents><Comments/> Comments</ShowContents>
     </div>
   );
 }

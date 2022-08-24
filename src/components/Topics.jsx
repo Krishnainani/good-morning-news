@@ -44,8 +44,8 @@ export default function Topics() {
         {topics.map((topic) => {
           return (
             <>
-              <li className="cards">
-                <h6 id="card">
+              <li className="topic_card">
+                <h6 id="topic_card">
                   Topic : {topic.slug}
                   <br />
                   Description : {topic.description}

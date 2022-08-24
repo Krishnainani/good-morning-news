@@ -38,18 +38,20 @@
  
   display: grid;
    
-  grid-template-columns: auto;
+  grid-template-columns:auto;
    
-  grid-auto-rows: auto;
+  grid-auto-rows: min-content;
    
   grid-gap: 1.5rem;
-   
+
+ padding: 0 1.5rem 0;
   }
    
    
   #card {
    
   border: 1px solid #e7e7e7;
+
    
   border-radius: 15px;
    
@@ -92,7 +94,7 @@ button {
     padding: 0.4rem;
   }
 
-  /* .cards {
+  .topic_cards {
  
     display: grid;
      
@@ -105,14 +107,14 @@ button {
     }
      
      
-    #card {
+    #topic_card {
      
     border: 1px solid #e7e7e7;
      
     border-radius: 15px;
      
     padding: 0.7rem;
-    }   */
+    }  
 
 .link-articles{
       background-color: #e7e7e7;
