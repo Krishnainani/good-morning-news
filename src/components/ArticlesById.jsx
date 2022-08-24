@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 export default function ArticleById() {
   const [articleById, setArticleById] = useState({});
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -22,6 +23,14 @@ export default function ArticleById() {
       <h6>{date.toLocaleString()}</h6>
       <p>{articleById.body}</p>
       <button type="display">votes - {articleById.votes}</button>
+      <button type="submit" >
+        <i className="fas fa-thumbs-up fa-2x" id="thumbs-up"></i>
+      </button>
+      <button type="submit">
+        <i className="fas fa-thumbs-down fa-2x" id="thumbs-down"></i>
+      </button>
+      <br />
+      <br />
       <button type="display">comments - {articleById.comment_count}</button>
     </div>
   );

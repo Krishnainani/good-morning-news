@@ -119,3 +119,10 @@ button {
       color:rgb(248, 252, 251) ;
       text-decoration: none;
     }
+
+    #thumbs-up{
+      color: #04AA6D;
+    }
+    #thumbs-down{
+      color: #ff0505;
+    }
