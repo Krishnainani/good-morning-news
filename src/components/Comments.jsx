@@ -10,7 +10,7 @@ export default function Comments() {
     fetchCommentsByArticleId(id).then((res) => {
       setcomments(res.comments);
     });
-  });
+  }, []);
 
   return (
     <div>
