@@ -3,6 +3,7 @@ import { fetchArticleById, patchVotes } from "../api";
 import { useParams } from "react-router-dom";
 import Comments from "./Comments";
 import ShowContents from "./Flip";
+import PostComments from "./PostComents";
 
 export default function ArticleById() {
   const [articleById, setArticleById] = useState({});
@@ -46,6 +47,7 @@ export default function ArticleById() {
       <br />
       <button type="display">comments - {articleById.comment_count}</button>
       <ShowContents><Comments/> Comments</ShowContents>
+      <ShowContents><PostComments/> Comments </ShowContents>
     </div>
   );
 }
