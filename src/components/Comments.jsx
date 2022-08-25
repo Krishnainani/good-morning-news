@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { fetchCommentsByArticleId } from "../api";
+import { useParams } from "react-router-dom";
 
 export default function Comments() {
   const [comments, setcomments] = useState([]);
+  const { id } = useParams();
 
   useEffect(() => {
-    fetchCommentsByArticleId(1).then((res) => {
+    fetchCommentsByArticleId(id).then((res) => {
       setcomments(res.comments);
     });
   });
@@ -19,12 +21,8 @@ export default function Comments() {
             <li className="cards">
               <p id="card">
                 {comment.body}
-                <br />
-                <br />
-                By: {comment.author}
-                <br />
-                <br />
-               {date.toDateString()} {date.toLocaleTimeString()}
+                <h4>By: {comment.author}</h4>
+                {date.toDateString()} {date.toLocaleTimeString()}
                 <br />
                 <br />
                 <button type="display">Likes: {comment.votes}</button>
