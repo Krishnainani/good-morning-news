@@ -46,7 +46,7 @@ export default function ArticleById() {
       <br />
       <br />
       <button type="display">comments - {articleById.comment_count}</button>
-      <ShowContents><Comments/> Comments</ShowContents>
+      <ShowContents><Comments/>Comments Hide Show</ShowContents>
 
     </div>
   );
