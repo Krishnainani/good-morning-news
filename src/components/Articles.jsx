@@ -33,7 +33,7 @@ export default function Articles() {
       <h2>Articles :</h2>
       <ul>
         {articles.map((article) => {
-          let date = Date(`${article.created_at}`);
+           let date = new Date(article.created_at);
           return (
             <Link className="link-articles" to={`num/${article.article_id}`}>
               <li className="cards">
@@ -44,7 +44,7 @@ export default function Articles() {
                   <br />
                   Topic : {article.topic}
                   <br />
-                  {date.toLocaleString()}
+                  {date.toDateString()} {date.toLocaleTimeString()}
                 </h6>
               </li>
             </Link>
