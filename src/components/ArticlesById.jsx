@@ -3,7 +3,7 @@ import { fetchArticleById, patchVotes } from "../api";
 import { useParams } from "react-router-dom";
 import Comments from "./Comments";
 import ShowContents from "./Flip";
-
+import PostComments from "./PostComments";
 
 export default function ArticleById() {
   const [articleById, setArticleById] = useState({});
@@ -29,12 +29,13 @@ export default function ArticleById() {
   }
   let date = new Date(articleById.created_at);
   return (
-
     <div>
       <h3>{articleById.title}</h3>
       <h4>By -- {articleById.author}</h4>
       <h5>Topic -- {articleById.topic}</h5>
-      <h6>{date.toDateString()} {date.toLocaleTimeString()}</h6>
+      <h6>
+        {date.toDateString()} {date.toLocaleTimeString()}
+      </h6>
       <p>{articleById.body}</p>
       <button type="display">votes - {articleById.votes}</button>
       <button type="submit" onClick={handleVotes(1, articleById.article_id)}>
@@ -46,8 +47,13 @@ export default function ArticleById() {
       <br />
       <br />
       <button type="display">comments - {articleById.comment_count}</button>
-      <ShowContents><Comments/>Comments Hide Show</ShowContents>
-
+      <ShowContents>
+        <Comments />
+        Comments Hide Show
+      </ShowContents>
+      <ShowContents>
+        <PostComments />Comment Post Post
+      </ShowContents>
     </div>
   );
 }
