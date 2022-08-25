@@ -18,15 +18,15 @@ export default function Comments() {
         {comments.map((comment) => {
           let date = new Date(comment.created_at);
           return (
-            <li className="cards">
-              <p id="card">
+            <li className="cards" key={comment.comment_id}>
+              <section id="card">
                 {comment.body}
                 <h4>By: {comment.author}</h4>
                 {date.toDateString()} {date.toLocaleTimeString()}
                 <br />
                 <br />
                 <button type="display">Likes: {comment.votes}</button>
-              </p>
+              </section>
             </li>
           );
         })}

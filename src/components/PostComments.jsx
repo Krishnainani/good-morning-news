@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 export default function PostComments() {
   const [body, setBody] = useState("");
-  const [name, setName] = useState("");
+  const [name, setName] = useState("tickle122");
   const [newComment, setNewComment] = useState([]);
   const [allUsers, setUsers] = useState([]);
   const { id } = useParams();
@@ -28,7 +28,7 @@ export default function PostComments() {
     event.preventDefault();
     postComments(name, body, id).then(({ comment }) => {
       setBody("");
-      setName("")
+      setName("tickle122");
       return setNewComment([comment]);
     });
   };
@@ -55,29 +55,31 @@ export default function PostComments() {
           className="input-box"
         >
           {allUsers.map((user) => {
-            return <option value={user.username}>{user.username}</option>;
+            return <option key={user.username} value={user.username}>{user.username}</option>;
           })}
         </select>
         <br />
         <button type="submit">submit</button>
       </form>
-      <ul>
-        {newComment.map((comment) => {
-          let date = new Date(comment.created_at);
-          return (
-            <li className="cards">
-              <p id="card">
-                {comment.body}
-                <h4>By: {comment.author}</h4>
-                {date.toDateString()} {date.toLocaleTimeString()}
-                <br />
-                <br />
-                <button type="display">Likes: {comment.votes}</button>
-              </p>
-            </li>
-          );
-        })}
-      </ul>
+      <div>
+        <ul>
+          {newComment.map((comment) => {
+            let date = new Date(comment.created_at);
+            return (
+              <li className="cards" key={comment.comment_id}>
+                <section id="card">
+                  {comment.body}
+                  <h4>By: {comment.author}</h4>
+                  {date.toDateString()} {date.toLocaleTimeString()}
+                  <br />
+                  <br />
+                  <button type="display">Likes: {comment.votes}</button>
+                </section>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 }
