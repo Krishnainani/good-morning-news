@@ -39,6 +39,7 @@ export default function Articles({ articlesByTopic }) {
       <ArticlesBySortOrder
         setArticles={setArticles}
         setIsLoading={setIsLoading}
+        isLoading={isLoading}
       />
       <ul>
         {articles.map((article) => {

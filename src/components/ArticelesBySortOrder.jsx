@@ -7,14 +7,7 @@ export default function ArticlesBySortOrder({ setArticles, setIsLoading }) {
 
   const handleSort = (event) => {
     setSortBy(event.target.value);
-  };
-
-  const handleOrder = (event) => {
-    setOrder(event.target.value);
-  };
-
-  const handleSubmit = () => {
-    fetchSortByArticles(sortBy, order).then((res) => {
+    fetchSortByArticles(event.target.value, order).then((res) => {
       if (res.msg === "Not Found") {
         setArticles(["bad"]);
       } else {
@@ -24,9 +17,32 @@ export default function ArticlesBySortOrder({ setArticles, setIsLoading }) {
     });
   };
 
+  const handleOrder = (event) => {
+    setOrder(event.target.value);
+    fetchSortByArticles(sortBy, event.target.value).then((res) => {
+      if (res.msg === "Not Found") {
+        setArticles(["bad"]);
+      } else {
+        setArticles(res.articles);
+        setIsLoading(false);
+      }
+    });
+  };
+
+  // const handleChange = () => {
+  //   fetchSortByArticles(sortBy, order).then((res) => {
+  //     if (res.msg === "Not Found") {
+  //       setArticles(["bad"]);
+  //     } else {
+  //       setArticles(res.articles);
+  //       setIsLoading(false);
+  //     }
+  //   });
+  // };
+
   return (
     <div>
-      <form onClick={handleSubmit}>
+      <form >
         <label htmlFor="sort_by">Sort By: </label>
         <select
           onChange={handleSort}

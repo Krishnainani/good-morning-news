@@ -85,6 +85,7 @@ export function fetchUsers() {
 }
 
 export function fetchSortByArticles(sort, order) {
+  console.log("api");
   return fetch(
     `https://good-morning-news-app.herokuapp.com/api/articles?sort_by=${sort}&order=${order}`
   ).then((res) => {
@@ -93,7 +94,6 @@ export function fetchSortByArticles(sort, order) {
 }
 
 export function deleteComments(Id) {
-  console.log(Id);
   return fetch(
     `https://good-morning-news-app.herokuapp.com/api/comments/${Id}`,
     {
