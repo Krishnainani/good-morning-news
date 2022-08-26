@@ -6,12 +6,10 @@ export default function ArticlesBySortOrder({ setArticles, setIsLoading }) {
   const [order, setOrder] = useState("desc");
 
   const handleSort = (event) => {
-    event.preventDefault();
     setSortBy(event.target.value);
   };
 
   const handleOrder = (event) => {
-    event.preventDefault();
     setOrder(event.target.value);
   };
 

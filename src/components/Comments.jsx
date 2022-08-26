@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { deleteComments, fetchCommentsByArticleId } from "../api";
 import { useParams } from "react-router-dom";
 
-export default function Comments() {
+export default function Comments({setCommentCount}) {
   const [comments, setcomments] = useState([]);
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -21,11 +21,12 @@ export default function Comments() {
 
   const handleClick = (comment_id) => {
     return (event) => {
-      console.log("dl");
       setResponse("comment deleted!");
-     return deleteComments(comment_id).then(() => {
+      return deleteComments(comment_id).then(() => {
         const filter = comments.filter((currComment) => currComment.comment_id !== comment_id)
         setcomments(filter)
+        const commentSum = comments.length - 1; 
+        setCommentCount(commentSum)
         return setTimeout(() => {
           setResponse("");
         }, 3000);
@@ -61,7 +62,7 @@ export default function Comments() {
                   <button type="display">Likes: {comment.votes}</button>
                 </section>
               </li>
-              <button type="delete" onClick={handleClick(comment.comment_id)}>
+              <button key={comment.article_id} type="delete" onClick={handleClick(comment.comment_id)}>
                 Delete Comment
               </button>
               <br/>

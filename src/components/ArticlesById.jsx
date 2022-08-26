@@ -7,6 +7,7 @@ import PostComments from "./PostComments";
 
 export default function ArticleById() {
   const [articleById, setArticleById] = useState({});
+  const [commentCount, setCommentCount] = useState(articleById.comment_count)
   const { id } = useParams();
 
   useEffect(() => {
@@ -46,9 +47,9 @@ export default function ArticleById() {
       </button>
       <br />
       <br />
-      <button type="display">comments - {articleById.comment_count}</button>
+      <button type="display">comments - {commentCount ? commentCount: articleById.comment_count}</button>
       <ShowContents>
-        <Comments />
+        <Comments setCommentCount={setCommentCount} />
         Comments Hide Show
       </ShowContents>
       <br/>
