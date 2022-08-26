@@ -56,3 +56,39 @@ export function fetchCommentsByArticleId(Id) {
     return res.json();
   });
 }
+
+export function postComments(username, body, Id) {
+  return fetch(
+    `https://good-morning-news-app.herokuapp.com/api/articles/${Id}/comments`,
+    {
+      method: "POST",
+      body: JSON.stringify({ username: username, body: body }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  ).then((res) => {
+    // if (res.ok === false) {
+    //   return Promise.reject({ msg: "Invalid request" });
+    // } else {
+    return res.json();
+    // }
+  });
+}
+
+export function fetchUsers() {
+  return fetch(
+    `https://good-morning-news-app.herokuapp.com/api/users`
+  ).then((res) => {
+    return res.json();
+  });
+}
+
+export function fetchSortByArticles(sort) {
+  console.log(sort, "api");
+  return fetch(
+    `https://good-morning-news-app.herokuapp.com/api/articles?sort_by=${sort}`
+  ).then((res) => {
+    return res.json();
+  });
+}
