@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { fetchTopics } from "../api";
 
 export default function Topics() {
@@ -11,12 +11,11 @@ export default function Topics() {
       if (res.msg === "Not Found") {
         setTopics(["bad"]);
       } else {
-      setTopics(res.topics);
-      setIsLoading(false)
+        setTopics(res.topics);
+        setIsLoading(false);
       }
     });
   }, []);
-
 
   const navigate = useNavigate();
 
@@ -41,10 +40,10 @@ export default function Topics() {
     <div>
       <h2>Topics :</h2>
       <ul>
-        {topics.map((topic) => {
+        {topics.map((topic, index) => {
           return (
             <>
-              <li className="topic_card">
+              <li key={index} className="topic_card">
                 <h6 id="topic_card">
                   Topic : {topic.slug}
                   <br />

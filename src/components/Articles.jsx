@@ -1,33 +1,22 @@
 import { useEffect, useState } from "react";
 import { fetchArticles, fetchSortByArticles } from "../api";
 import { Link } from "react-router-dom";
+import ArticlesBySortOrder from "./ArticelesBySortOrder";
 
-export default function Articles() {
+export default function Articles({ articlesByTopic }) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [sortBy, setSortBy] = useState("created_at");
 
-  const handleChange = (event) => {
-    event.preventDefault();
-    setSortBy(event.target.value);
-  };
-
-  const handleSubmit = () => {
-    fetchSortByArticles(sortBy).then((res) => {
-      if (res.msg === "Not Found") {
-        setArticles(["bad"]);
-      } else {
-        setArticles(res.articles);
-        setIsLoading(false);
-      }
-    });
-  }
   useEffect(() => {
     fetchArticles().then((res) => {
       if (res.msg === "Not Found") {
         setArticles(["bad"]);
       } else {
-        setArticles(res.articles);
+        if (articlesByTopic) {
+          setArticles(articlesByTopic);
+        } else {
+          setArticles(res.articles);
+        }
         setIsLoading(false);
       }
     });
@@ -47,19 +36,11 @@ export default function Articles() {
   return (
     <div>
       <h2>Articles :</h2>
-      <form onClick={handleSubmit}>
-        <label htmlFor="sort_by">Sort By: </label>
-        <select
-          onChange={handleChange}
-          id="sort_by"
-          type="search"
-          value={sortBy}
-          className="input-box"
-        >
-          <option value="created_at">Date</option>;
-          <option value="votes">Votes</option>;
-        </select>
-      </form> 
+      <ArticlesBySortOrder
+        setArticles={setArticles}
+        setIsLoading={setIsLoading}
+        isLoading={isLoading}
+      />
       <ul>
         {articles.map((article) => {
           let date = new Date(article.created_at);
@@ -81,6 +62,10 @@ export default function Articles() {
                   <br />
                   <br />
                   <button type="display">votes - {article.votes}</button>
+                  <br />
+                  <button type="display">
+                    Comments - {article.comment_count}
+                  </button>
                 </h6>
               </li>
             </Link>

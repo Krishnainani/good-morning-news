@@ -7,7 +7,7 @@ export default function PostComments() {
   const [name, setName] = useState("tickle122");
   const [allUsers, setUsers] = useState([]);
   const { id } = useParams();
-  const [set, setSet] = useState("");
+  const [response, setResponse] = useState("");
 
   useEffect(() => {
     fetchUsers().then(({ users }) => {
@@ -24,13 +24,13 @@ export default function PostComments() {
   };
 
   const handleSubmit = (event) => {
-    setSet("Posted Comment Successful!");
+    setResponse("Posted Comment Successful!");
     event.preventDefault();
     postComments(name, body, id).then(() => {
       setBody("");
       setName("tickle122");
       return setTimeout(() => {
-        setSet("");
+        setResponse("");
       }, 3000);
     });
   };
@@ -68,7 +68,7 @@ export default function PostComments() {
         <button type="submit">submit</button>
       </form>
       <div>
-        <p>{set}</p>
+        <p>{response}</p>
       </div>
     </div>
   );

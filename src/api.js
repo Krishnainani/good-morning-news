@@ -77,18 +77,27 @@ export function postComments(username, body, Id) {
 }
 
 export function fetchUsers() {
+  return fetch(`https://good-morning-news-app.herokuapp.com/api/users`).then(
+    (res) => {
+      return res.json();
+    }
+  );
+}
+
+export function fetchSortByArticles(sort, order) {
+  console.log("api");
   return fetch(
-    `https://good-morning-news-app.herokuapp.com/api/users`
+    `https://good-morning-news-app.herokuapp.com/api/articles?sort_by=${sort}&order=${order}`
   ).then((res) => {
     return res.json();
   });
 }
 
-export function fetchSortByArticles(sort) {
-  console.log(sort, "api");
+export function deleteComments(Id) {
   return fetch(
-    `https://good-morning-news-app.herokuapp.com/api/articles?sort_by=${sort}`
-  ).then((res) => {
-    return res.json();
-  });
+    `https://good-morning-news-app.herokuapp.com/api/comments/${Id}`,
+    {
+      method: "DELETE",
+    }
+  );
 }
