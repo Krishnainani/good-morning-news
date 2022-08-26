@@ -29,7 +29,7 @@ export default function Comments({setCommentCount}) {
         setCommentCount(commentSum)
         return setTimeout(() => {
           setResponse("");
-        }, 3000);
+        }, 1000);
       });
     };
   };
@@ -52,6 +52,7 @@ export default function Comments({setCommentCount}) {
           let date = new Date(comment.created_at);
           return (
             <>
+              <p>{response}</p>
               <li className="cards" key={comment.comment_id}>
                 <section id="card">
                   {comment.body}
