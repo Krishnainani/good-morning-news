@@ -51,9 +51,9 @@ export default function ArticleById() {
         <Comments />
         Comments Hide Show
       </ShowContents>
-      <ShowContents>
-        <PostComments />Comment Post Post
-      </ShowContents>
+      <br/>
+      <button type="display">Post Comment</button>
+      <PostComments />
     </div>
   );
 }

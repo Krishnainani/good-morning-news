@@ -5,12 +5,29 @@ import { useParams } from "react-router-dom";
 export default function Comments() {
   const [comments, setcomments] = useState([]);
   const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchCommentsByArticleId(id).then((res) => {
-      setcomments(res.comments);
+      if (res.msg === "Not Found") {
+        setcomments(["bad"]);
+      } else {
+        setcomments(res.comments);
+        setIsLoading(false);
+      }
     });
   }, []);
+
+  if (comments[0] === "bad") {
+    return (
+      <>
+        <h2>Something went wrong</h2>
+        <h3>Please try again later!</h3>
+      </>
+    );
+  } else if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div>
