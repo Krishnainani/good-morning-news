@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchArticlesByTopic } from "../api";
+import Articles from "./Articles";
 
 export default function ArticlesByTopic() {
   const [articlesByTopic, setArticlesByTopic] = useState([]);
@@ -34,24 +35,7 @@ export default function ArticlesByTopic() {
   return (
     <div>
       <h2>Articles on {slug}</h2>
-      <ul>
-        {articlesByTopic.map((article) => {
-          let date = Date(`${article.created_at}`);
-          return (
-            <li className="cards" key={article.article_id}>
-              <h6 id="card">
-                Title : {article.title}
-                <br />
-                Author : {article.author}
-                <br />
-                Topic : {article.topic}
-                <br />
-                Created on : {date.toLocaleString()}
-              </h6>
-            </li>
-          );
-        })}
-      </ul>
+      <Articles articlesByTopic={articlesByTopic}/>
     </div>
   );
 }

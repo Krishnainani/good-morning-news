@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { fetchCommentsByArticleId } from "../api";
+import { deleteComments, fetchCommentsByArticleId } from "../api";
 import { useParams } from "react-router-dom";
 
 export default function Comments() {
   const [comments, setcomments] = useState([]);
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
+  const [response, setResponse] = useState("");
 
   useEffect(() => {
     fetchCommentsByArticleId(id).then((res) => {
@@ -17,6 +18,20 @@ export default function Comments() {
       }
     });
   }, []);
+
+  const handleClick = (comment_id) => {
+    return (event) => {
+      console.log("dl");
+      setResponse("comment deleted!");
+     return deleteComments(comment_id).then(() => {
+        const filter = comments.filter((currComment) => currComment.comment_id !== comment_id)
+        setcomments(filter)
+        return setTimeout(() => {
+          setResponse("");
+        }, 3000);
+      });
+    };
+  };
 
   if (comments[0] === "bad") {
     return (
@@ -35,16 +50,23 @@ export default function Comments() {
         {comments.map((comment) => {
           let date = new Date(comment.created_at);
           return (
-            <li className="cards" key={comment.comment_id}>
-              <section id="card">
-                {comment.body}
-                <h4>By: {comment.author}</h4>
-                {date.toDateString()} {date.toLocaleTimeString()}
-                <br />
-                <br />
-                <button type="display">Likes: {comment.votes}</button>
-              </section>
-            </li>
+            <>
+              <li className="cards" key={comment.comment_id}>
+                <section id="card">
+                  {comment.body}
+                  <h4>By: {comment.author}</h4>
+                  {date.toDateString()} {date.toLocaleTimeString()}
+                  <br />
+                  <br />
+                  <button type="display">Likes: {comment.votes}</button>
+                </section>
+              </li>
+              <button type="delete" onClick={handleClick(comment.comment_id)}>
+                Delete Comment
+              </button>
+              <br/>
+              <br />
+            </>
           );
         })}
       </ul>
