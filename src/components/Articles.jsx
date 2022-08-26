@@ -6,14 +6,20 @@ export default function Articles() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sortBy, setSortBy] = useState("created_at");
+  const [order, setOrder] = useState("desc");
 
-  const handleChange = (event) => {
+  const handleSort = (event) => {
     event.preventDefault();
     setSortBy(event.target.value);
   };
 
+  const handleOrder = (event) => {
+    event.preventDefault();
+    setOrder(event.target.value);
+  };
+
   const handleSubmit = () => {
-    fetchSortByArticles(sortBy).then((res) => {
+    fetchSortByArticles(sortBy, order).then((res) => {
       if (res.msg === "Not Found") {
         setArticles(["bad"]);
       } else {
@@ -21,9 +27,9 @@ export default function Articles() {
         setIsLoading(false);
       }
     });
-  }
+  };
   useEffect(() => {
-    fetchArticles().then((res) => {
+    fetchSortByArticles(sortBy, order).then((res) => {
       if (res.msg === "Not Found") {
         setArticles(["bad"]);
       } else {
@@ -50,7 +56,7 @@ export default function Articles() {
       <form onClick={handleSubmit}>
         <label htmlFor="sort_by">Sort By: </label>
         <select
-          onChange={handleChange}
+          onChange={handleSort}
           id="sort_by"
           type="search"
           value={sortBy}
@@ -58,8 +64,20 @@ export default function Articles() {
         >
           <option value="created_at">Date</option>;
           <option value="votes">Votes</option>;
+          <option value="comment_count">Comments</option>;
         </select>
-      </form> 
+        <label htmlFor="order">Order: </label>
+        <select
+          onChange={handleOrder}
+          id="order"
+          type="search"
+          value={order}
+          className="input-box"
+        >
+          <option value="desc">Decending</option>;
+          <option value="asc">Ascending</option>;
+        </select>
+      </form>
       <ul>
         {articles.map((article) => {
           let date = new Date(article.created_at);
@@ -81,6 +99,8 @@ export default function Articles() {
                   <br />
                   <br />
                   <button type="display">votes - {article.votes}</button>
+                  <br />
+                  <button type="display">Comments - {article.comment_count}</button>
                 </h6>
               </li>
             </Link>

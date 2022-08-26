@@ -38,7 +38,7 @@ export default function ArticlesByTopic() {
         {articlesByTopic.map((article) => {
           let date = Date(`${article.created_at}`);
           return (
-            <li className="cards">
+            <li className="cards" key={article.article_id}>
               <h6 id="card">
                 Title : {article.title}
                 <br />

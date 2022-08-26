@@ -84,10 +84,9 @@ export function fetchUsers() {
   });
 }
 
-export function fetchSortByArticles(sort) {
-  console.log(sort, "api");
+export function fetchSortByArticles(sort, order) {
   return fetch(
-    `https://good-morning-news-app.herokuapp.com/api/articles?sort_by=${sort}`
+    `https://good-morning-news-app.herokuapp.com/api/articles?sort_by=${sort}&order=${order}`
   ).then((res) => {
     return res.json();
   });
