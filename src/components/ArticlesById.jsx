@@ -52,9 +52,6 @@ export default function ArticleById() {
         <Comments setCommentCount={setCommentCount} />
         Comments Hide Show
       </ShowContents>
-      <br/>
-      <button type="display">Post Comment</button>
-      <PostComments />
     </div>
   );
 }
