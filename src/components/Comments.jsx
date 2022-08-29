@@ -17,14 +17,10 @@ export default function Comments({ setCommentCount }) {
   const [allUsers, setUsers] = useState([]);
   const [response, setResponse] = useState("");
 
-  useEffect(() => {
+  useEffect((id) => {
     fetchCommentsByArticleId(id).then((res) => {
-      if (res.msg === "Not Found") {
-        setcomments(["bad"]);
-      } else {
-        setcomments(res.comments);
-        setIsLoading(false);
-      }
+      setcomments(res.comments);
+      setIsLoading(false);
     });
     fetchUsers().then(({ users }) => {
       return setUsers(users);
@@ -43,7 +39,6 @@ export default function Comments({ setCommentCount }) {
     setResponse("Posted Comment Successful!");
     event.preventDefault();
     postComments(name, body, id).then((res) => {
-      console.log([...comments, res.comment]);
       setcomments([...comments, res.comment]);
       const commentSum = comments.length + 1;
       setCommentCount(commentSum);
@@ -72,23 +67,16 @@ export default function Comments({ setCommentCount }) {
     };
   };
 
-  if (comments[0] === "bad") {
-    return (
-      <>
-        <h2>Something went wrong</h2>
-        <h3>Please try again later!</h3>
-      </>
-    );
-  } else if (isLoading) {
+  if (isLoading) {
     return <p>Loading...</p>;
   }
 
   return (
     <div>
       <p>{response}</p>
-      <br/>
+      <br />
       <button type="display">Post Comment</button>
-      <br/>
+      <br />
       <form onSubmit={handleSubmit}>
         <label htmlFor="comment-body">Comment: </label>
         <input
@@ -100,13 +88,14 @@ export default function Comments({ setCommentCount }) {
           required
         ></input>
         <br />
-        <label htmlFor="input-name">Name: </label>
+        <label htmlFor="input-name">Select User: </label>
         <select
           onChange={handleName}
           id="input-name"
           type="search"
           value={name}
           className="input-box"
+          required
         >
           {allUsers.map((user) => {
             return (

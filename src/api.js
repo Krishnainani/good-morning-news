@@ -18,7 +18,12 @@ export function fetchArticlesByTopic(slug) {
   return fetch(
     `https://good-morning-news-app.herokuapp.com/api/articles?topic=${slug}`
   ).then((res) => {
-    return res.json();
+    console.log(res);
+    if (res.ok === false) {
+      return Promise.reject({ status: res.status, msg: res.statusText });
+    } else {
+      return res.json();
+    }
   });
 }
 
@@ -26,7 +31,11 @@ export function fetchArticleById(Id) {
   return fetch(
     `https://good-morning-news-app.herokuapp.com/api/articles/${Id}`
   ).then((res) => {
-    return res.json();
+    if (res.ok === false) {
+      return Promise.reject({ status: res.status, msg: res.statusText });
+    } else {
+      return res.json();
+    }
   });
 }
 
@@ -42,7 +51,7 @@ export function patchVotes(votes, Id) {
     }
   ).then((res) => {
     if (res.ok === false) {
-      return Promise.reject({ msg: "Invalid request" });
+      return Promise.reject({ status: res.status, msg: res.statusText });
     } else {
       return res.json();
     }

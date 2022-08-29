@@ -10,84 +10,64 @@ export default function Articles({ articlesByTopic }) {
 
   useEffect(() => {
     fetchArticles().then((res) => {
-      if (res.msg === "Not Found") {
-        setArticles(["bad"]);
+      if (articlesByTopic) {
+        setArticles(articlesByTopic);
       } else {
-        if (articlesByTopic) {
-          setArticles(articlesByTopic);
-        } else {
-          setArticles(res.articles);
-        }
-        setIsLoading(false);
+        setArticles(res.articles);
       }
+      setIsLoading(false);
     });
   }, []);
 
   const handleSort = (event) => {
-    setIsLoading(true)
+    setIsLoading(true);
     setSortBy(event.target.value);
     fetchSortByArticles(event.target.value, order).then((res) => {
-      if (res.msg === "Not Found") {
-        setArticles(["bad"]);
-      } else {
-        setArticles(res.articles);
-        setIsLoading(false);
-      }
+      setArticles(res.articles);
+      setIsLoading(false);
     });
   };
 
   const handleOrder = (event) => {
-    setIsLoading(true)
+    setIsLoading(true);
     setOrder(event.target.value);
     fetchSortByArticles(sortBy, event.target.value).then((res) => {
-      if (res.msg === "Not Found") {
-        setArticles(["bad"]);
-      } else {
-        setArticles(res.articles);
-        setIsLoading(false);
-      }
+      setArticles(res.articles);
+      setIsLoading(false);
     });
   };
 
-  if (articles[0] === "bad") {
-    return (
-      <>
-        <h2>Something went wrong</h2>
-        <h3>Please try again later!</h3>
-      </>
-    );
-  }
   return (
     <div>
       {isLoading ? <p>Loading...</p> : ""}
       <h2>Articles :</h2>
       <div>
-      <form>
-        <label htmlFor="sort_by">Sort By: </label>
-        <select
-          onChange={handleSort}
-          id="sort_by"
-          type="search"
-          value={sortBy}
-          className="input-box"
-        >
-          <option value="created_at">Date</option>;
-          <option value="votes">Votes</option>;
-          <option value="comment_count">Comments</option>;
-        </select>
-        <label htmlFor="order">Order: </label>
-        <select
-          onChange={handleOrder}
-          id="order"
-          type="search"
-          value={order}
-          className="input-box"
-        >
-          <option value="desc">Decending</option>;
-          <option value="asc">Ascending</option>;
-        </select>
-      </form>
-    </div>
+        <form>
+          <label htmlFor="sort_by">Sort By: </label>
+          <select
+            onChange={handleSort}
+            id="sort_by"
+            type="search"
+            value={sortBy}
+            className="input-box"
+          >
+            <option value="created_at">Date</option>;
+            <option value="votes">Votes</option>;
+            <option value="comment_count">Comments</option>;
+          </select>
+          <label htmlFor="order">Order: </label>
+          <select
+            onChange={handleOrder}
+            id="order"
+            type="search"
+            value={order}
+            className="input-box"
+          >
+            <option value="desc">Decending</option>;
+            <option value="asc">Ascending</option>;
+          </select>
+        </form>
+      </div>
       <ul>
         {articles.map((article) => {
           let date = new Date(article.created_at);
