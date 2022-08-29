@@ -27,7 +27,7 @@ function App() {
           <Route path="/topics" element={<Topics />} />
           <Route path="/topics/:slug" element={<ArticlesByTopic />} />
           <Route path="articles/num/:id" element={<ArticleById />} />
-          <Route path="/topic/:slug/num/:id" element={<ArticleById />} />
+          <Route path="/topics/:slug/num/:id" element={<ArticleById />} />
         </Routes>
       </div>
     // </CommentContext.Provider>

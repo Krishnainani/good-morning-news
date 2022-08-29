@@ -17,7 +17,7 @@ export default function Comments({ setCommentCount }) {
   const [allUsers, setUsers] = useState([]);
   const [response, setResponse] = useState("");
 
-  useEffect((id) => {
+  useEffect(() => {
     fetchCommentsByArticleId(id).then((res) => {
       setcomments(res.comments);
       setIsLoading(false);
@@ -25,7 +25,7 @@ export default function Comments({ setCommentCount }) {
     fetchUsers().then(({ users }) => {
       return setUsers(users);
     });
-  }, []);
+  }, [id]);
 
   const handleBody = (event) => {
     setBody(event.target.value);
@@ -70,51 +70,52 @@ export default function Comments({ setCommentCount }) {
   if (isLoading) {
     return <p>Loading...</p>;
   }
-
   return (
     <div>
-      <p>{response}</p>
-      <br />
-      <button type="display">Post Comment</button>
-      <br />
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="comment-body">Comment: </label>
-        <input
-          onChange={handleBody}
-          id="comment-body"
-          type="search"
-          value={body}
-          className="input-box"
-          required
-        ></input>
+      <div>
+        <p>{response}</p>
         <br />
-        <label htmlFor="input-name">Select User: </label>
-        <select
-          onChange={handleName}
-          id="input-name"
-          type="search"
-          value={name}
-          className="input-box"
-          required
-        >
-          {allUsers.map((user) => {
+        <button type="display">Post Comment</button>
+        <br />
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="comment-body">Comment: </label>
+          <input
+            onChange={handleBody}
+            id="comment-body"
+            type="search"
+            value={body}
+            className="input-box"
+            required
+          ></input>
+          <br />
+          <label htmlFor="input-name">Select User: </label>
+          <select
+            onChange={handleName}
+            id="input-name"
+            type="search"
+            value={name}
+            className="input-box"
+            required
+          >
+            {allUsers.map((user) => {
+              return (
+                <option key={user.username} value={user.username}>
+                  {user.username}
+                </option>
+              );
+            })}
+          </select>
+          <br />
+          <button type="submit">submit</button>
+        </form>
+      </div>
+      <div>
+        <p>{deleteResponse}</p>
+        <ul>
+          {comments.map((comment, index) => {
+            let date = new Date(comment.created_at);
             return (
-              <option key={user.username} value={user.username}>
-                {user.username}
-              </option>
-            );
-          })}
-        </select>
-        <br />
-        <button type="submit">submit</button>
-      </form>
-      <p>{deleteResponse}</p>
-      <ul>
-        {comments.map((comment) => {
-          let date = new Date(comment.created_at);
-          return (
-            <>
-              <li className="cards" key={comment.comment_id}>
+              <li key={comment.comment_id} className="cards">
                 <section id="card">
                   {comment.body}
                   <h4>By: {comment.author}</h4>
@@ -123,20 +124,20 @@ export default function Comments({ setCommentCount }) {
                   <br />
                   <button type="display">Likes: {comment.votes}</button>
                 </section>
+                <button
+                  key={index}
+                  type="delete"
+                  onClick={handleClick(comment.comment_id)}
+                >
+                  Delete Comment
+                </button>
+                <br />
+                <br />
               </li>
-              <button
-                key={comment.article_id}
-                type="delete"
-                onClick={handleClick(comment.comment_id)}
-              >
-                Delete Comment
-              </button>
-              <br />
-              <br />
-            </>
-          );
-        })}
-      </ul>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 }

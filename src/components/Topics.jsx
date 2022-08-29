@@ -40,18 +40,16 @@ export default function Topics() {
         <ul>
           {topics.map((topic, index) => {
             return (
-              <>
-                <li key={index} className="topic_card">
-                  <h6 id="topic_card">
+              <li className={"topic-cards"}key={index}>
+                <h6 id="topic_card">
                     Topic : {topic.slug}
                     <br />
                     Description : {topic.description}
                   </h6>
-                </li>
                 <button type="submit" onClick={handleSubmit(topic.slug)}>
                   View Articles on {topic.slug}
                 </button>
-              </>
+              </li>
             );
           })}
         </ul>

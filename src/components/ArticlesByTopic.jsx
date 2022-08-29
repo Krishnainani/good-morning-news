@@ -30,7 +30,7 @@ export default function ArticlesByTopic() {
     return (
       <div>
         <h2>Articles on {slug}</h2>
-        <Articles articlesByTopic={articlesByTopic} />
+        <Articles key={slug}articlesByTopic={articlesByTopic} />
       </div>
     );
   }
