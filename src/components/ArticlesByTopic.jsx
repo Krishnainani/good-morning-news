@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchArticlesByTopic } from "../api";
 import Articles from "./Articles";
@@ -30,7 +30,7 @@ export default function ArticlesByTopic() {
     return (
       <div>
         <h2>Articles on {slug}</h2>
-        <Articles key={slug}articlesByTopic={articlesByTopic} />
+        <Articles key={slug} articlesByTopic={articlesByTopic} />
       </div>
     );
   }

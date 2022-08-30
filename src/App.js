@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import Nav from "./components/Nav";
 import Topics from "./components/Topics";
+import React from "react";
 
 // const CommentContext = createContext();
 

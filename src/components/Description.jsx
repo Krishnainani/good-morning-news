@@ -1,3 +1,4 @@
+import React from "react";
 export default function Description() {
   const quotes = [
     `She's a person; the doctor pronounces her dead, not the news.  

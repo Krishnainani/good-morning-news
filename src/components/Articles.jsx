@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchArticles, fetchSortByArticles } from "../api";
 import { Link } from "react-router-dom";
 

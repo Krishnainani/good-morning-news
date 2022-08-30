@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchArticleById, patchVotes } from "../api";
 import { useParams } from "react-router-dom";
 import Comments from "./Comments";
